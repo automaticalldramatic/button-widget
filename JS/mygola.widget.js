@@ -18,14 +18,15 @@
 					morecontainer: "plus"
 				},
 				container: {
-					width: 400,
+					height: '40px',
+					width: '400px',
 					margin: '20% auto',
 					background: '#666',
 					padding: '20px'
 				},
 				morecontainer: {
 					display: 'none',
-					width: 100,
+					width: '100px',
 					background: '#666',
 					padding: '20px',
 					position: 'absolute'
@@ -119,8 +120,8 @@
 			});
 
 			var leftoffset = $('#' + cn).offset().left + $('#' + cn).width() - $('#' + mc).width();
-			// var topoffset = document.height - $('#' + cn).offset().top - ($('#' + mc).height());
-			var topoffset = $('#' + cn).offset().top + $('#' + cn).height();
+			var topoffset = document.height - $('#' + cn).offset().top - ($('#' + cn).height());
+			
 			$('#' + mc).offset({ top: topoffset, left: leftoffset});
 
 			$('#' + this._config.CSS.ids.container).append(fragment);
@@ -137,7 +138,6 @@
 				} else {
 					more.attachEvent('onclick', Widget.prototype.helpers.moreClickHandler);
 				}
-				
 				return more;
 			},
 
