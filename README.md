@@ -83,4 +83,4 @@ Regardless, you can always modify the style of the widget using CSS. This is giv
 
 ### Where can I see it.
 
-You can see this in action on http://rizwaniqbal.com/experiments/mygola
+[You can see this in action on http://rizwaniqbal.com/experiments/mygola](http://rizwaniqbal.com/experiments/mygola)
