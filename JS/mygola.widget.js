@@ -120,9 +120,7 @@
 
 			var leftoffset = $('#' + cn).offset().left + $('#' + cn).width() - $('#' + mc).width();
 			// var topoffset = document.height - $('#' + cn).offset().top - ($('#' + mc).height());
-			var topoffset = document.height - $('#' + cn).offset().top;
-			console.log(leftoffset);
-			console.log(topoffset);
+			var topoffset = $('#' + cn).offset().top + $('#' + cn).height();
 			$('#' + mc).offset({ top: topoffset, left: leftoffset});
 
 			$('#' + this._config.CSS.ids.container).append(fragment);
