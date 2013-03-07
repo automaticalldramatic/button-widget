@@ -27,9 +27,9 @@ I use the Simple JavaScript Inheritance pattern described by [John Resig](http:/
 
 1. Creating a constructor is very simple (in this case simply providing an init method does the trick).
 
-2.In order to create a new ‘class’ you must extend (sub-class) an existing class.
+2. In order to create a new ‘class’ you must extend (sub-class) an existing class.
 
-3.All of the ‘classes’ inherit from a single ancestor: `Mygola`. Therefore if you want to create a brand new class it must be a sub-class of `Mygola`.
+3. All of the ‘classes’ inherit from a single ancestor: `Mygola`. Therefore if you want to create a brand new class it must be a sub-class of `Mygola`.
 
 4. Access to overridden methods is provided (with their context properly set).
 
