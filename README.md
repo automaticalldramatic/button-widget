@@ -21,7 +21,7 @@ The consumer of the widget might want to replace the function linked with button
 
 ## How
 
-#### Inheritance
+### Inheritance
 
 I use the Simple JavaScript Inheritance pattern described by [John Resig](http://ejohn.org/). You can find this in `JS/mygola.js`.
 
@@ -37,7 +37,7 @@ I use the Simple JavaScript Inheritance pattern described by [John Resig](http:/
 
 **Also, I have used a mix of ++jQuery++ and ++native javascript++ throughout the file. This is to demo that the widget need not be dependant on any library. We can deploy it as a stand alone widget without any library dependancies.**
 
-#### Widget
+### Widget
 
 To create a widget on the front end, you have to create a new object of the Widget class. I have done this with classical inheritance. The whole project is also possible using prototypal inheritance applied, I was just more comfortable doing it this way.
 
@@ -58,3 +58,16 @@ The second argument takes an array of objects. Each button object in the buttons
 I use `DocumentFragments` to create the UI as it is much better than writing to DOM in a loop. Fragments would create a document fragment and keep it in memory. The write will happen when we actually append to the DOM.
 
 I use javascript native functions for this operation. We can also use jQuery for this. Something, like `$('<button> Some Text </button>')` would create a fragment in jQuery.
+
+#### Widget Customizations
+
+Also, you can customize various widget configuration parameters. For example: if you want to customize the number of buttons that are shown inside a widget, this is how you can do it.
+
+```
+	var widget = new Widget('buttonContainer');
+	widget._config.buttonLimit = 10;
+	widget._config.CSS.ids.morecontainer = 'customMoreContainer';
+```
+
+
+
