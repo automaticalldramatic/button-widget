@@ -39,7 +39,7 @@ I use the Simple JavaScript Inheritance pattern described by [John Resig](http:/
 
 ### Widget
 
-To create a widget on the front end, you have to create a new object of the Widget class. I have done this with classical inheritance. The whole project is also possible using prototypal inheritance applied, I was just more comfortable doing it this way.
+To create a widget on the front end, you have to create a new object of the Widget class. I have done this with classical inheritance. The whole project is also possible using prototypal inheritance applied, I was just more comfortable doing it this way. You can look at the `Widget.helpers.moreButton`() method to see prototypal inheritance in play.
 
 So, you do something like `var widget = new Widget('buttonContainer');` on the widget consumer, where button container is the ID of the container you want to paint the widget in.
 
@@ -51,7 +51,7 @@ The second argument takes an array of objects. Each button object in the buttons
 
 1. `text`: The text that will display on the face of the button;
 
-2. `handler`: the function that should fire when the button is clicked;
+2. `handler`: the function that should fire based on the eventType set. We can extend this further to have multiple handlers;
 
 3. `isDefault`: an optional boolean value that specifies that a button should be highlighted and focused by default. I am not handling this right now, cause this is out of the scope of our example.
 
@@ -69,5 +69,18 @@ Also, you can customize various widget configuration parameters. For example: if
 	widget._config.CSS.ids.morecontainer = 'customMoreContainer';
 ```
 
+You can also give custom style to the widget.
 
+```
+	var widget = new Widget('buttonContainer');
+	widget._config.CSS.container = {
+		width: '300px',
+		background: '#fff000'
+	}
+```
 
+Regardless, you can always modify the style of the widget using CSS. This is given to help you dynamically modify the style before you render the widget again.
+
+### Where can I see it.
+
+You can see this in action on http://rizwaniqbal.com/experiments/mygola

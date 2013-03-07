@@ -1,21 +1,35 @@
 ;(function(window, document, undefined){
+	
 	this.Widget = Mygola.extend({
 		_class: 'Widget',
+		/**
+		 * Configuration for the widget
+		 * @type {Object}
+		 */
 		_config: {
 			buttonLimit: 5,
-			failOverText: 'More...',
+			moreText: 'More...',
 			CSS: {
 				classes: {
 					container: "container"
 				},
 				ids: {
 					container: "",
-					morecontainer: "moreButtons"
+					morecontainer: "plus"
+				},
+				container: {
+					width: 400,
+					margin: '20% auto',
+					background: '#666',
+					padding: '20px'
+				},
+				morecontainer: {
+					display: 'none',
+					width: 100,
+					background: '#666',
+					padding: '20px',
+					position: 'absolute'
 				}
-			},
-
-			moreClickHandler: function() {
-				console.log('more clicked');
 			}
 		},
 
@@ -37,37 +51,29 @@
 				if(i !== 0) {
 					this._config.CSS.classes.container = classname;
 				} else {
-					return;
+					this._config.CSS.classes.container = classname.substr(1);
 				}
 			}
 			this._config.CSS.ids.container = el;
-			$('#' + el).addClass(this._config.CSS.classes.container);
-			return this;
-		},
+			var ml = this._config.CSS.ids.morecontainer;
 
-		moreButton: function() {
-			var more = document.createElement("button");
-			more.textContent = "More....";
-			if(more.addEventListener) {
-				more.addEventListener( "click", this._config.moreClickHandler, false);
-			} else {
-				more.attachEvent('onclick', this._config.moreClickHandler);
-			}
-			return more;
+			$('#' + el).addClass(this._config.CSS.classes.container);
+
+			return this;
 		},
 
 		/**
 		 * Renders the buttons and binds events to them.
-		 * The consumenr still has to paint them to come to the front end.
-		 * @param  {[type]} element [description]
-		 * @param  {[type]} buttons [description]
-		 * @return {[type]}         [description]
+		 *
+		 * @author Rizwan Iqbal
+		 * @param  {string} element Type of HTML element to paint
+		 * @param  {array} buttons  An array of configuration options for the buttons
 		 */
 		render: function(element, buttons) {
 			if (typeof buttons !== "object") return;
 			
 			var html,butt,
-				more = this.moreButton(),
+				more = this.helpers.moreButton(),
 				docfrag = document.createDocumentFragment(),
 				moredocfrag = document.createDocumentFragment(),
 				limit = this._config.buttonLimit;
@@ -95,13 +101,56 @@
 			this.paint(docfrag, moredocfrag);
 		},
 
+		/**
+		 * Paints the UI to the front end
+		 * @param  {object} fragment     Document Fragment
+		 * @param  {object} morefragment Document Fragment for more
+		 */
 		paint:function(fragment, morefragment) {
+			var cn = this._config.CSS.ids.container,
+				mc = this._config.CSS.ids.morecontainer;
+
+			$.each(this._config.CSS.container, function(k , v) {
+				$('#' + cn).css(k, v);
+			});
+
+			$.each(this._config.CSS.morecontainer, function(k , v) {
+				$('#' + mc).css(k, v);
+			});
+
+			var leftoffset = $('#' + cn).offset().left + $('#' + cn).width() - $('#' + mc).width();
+			// var topoffset = document.height - $('#' + cn).offset().top - ($('#' + mc).height());
+			var topoffset = document.height - $('#' + cn).offset().top;
+			console.log(leftoffset);
+			console.log(topoffset);
+			$('#' + mc).offset({ top: topoffset, left: leftoffset});
+
 			$('#' + this._config.CSS.ids.container).append(fragment);
 			document.getElementById(this._config.CSS.ids.morecontainer).appendChild(morefragment);
 		},
 
-		showConfig: function() {
-			console.log(this._config);
+		helpers: {
+
+			moreButton: function() {
+				var more = document.createElement("button");
+				more.textContent = Widget.prototype._config.moreText;
+				if(more.addEventListener) {
+					more.addEventListener( "click", Widget.prototype.helpers.moreClickHandler, false);
+				} else {
+					more.attachEvent('onclick', Widget.prototype.helpers.moreClickHandler);
+				}
+				
+				return more;
+			},
+
+			moreClickHandler: function() {
+				var cont = Widget.prototype._config.CSS.ids.morecontainer;
+				($('#'+cont).is(":visible")) ? $('#'+cont).hide() : $('#'+cont).show();
+			},
+
+			showConfig: function() {
+				console.log(this._config);
+			}
 		}
 	});
 })(this, document);
